@@ -26,7 +26,7 @@ export default function CategorySection({ titleText, titleStyle }) {
         <CategoryCard
           style={{}}
           imgSrc={"/images/shuttle-icon.svg"}
-          categoryTitle={"Camp Activities"}
+          categoryTitle={"Camp Activity"}
           CategoryCardPa={
             " Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
           }
@@ -34,7 +34,7 @@ export default function CategorySection({ titleText, titleStyle }) {
         <CategoryCard
           style={{}}
           imgSrc={"/images/shuttle-icon.svg"}
-          categoryTitle={"Kebbi Nysc Events"}
+          categoryTitle={"Kebbi NYSC Event"}
           CategoryCardPa={
             " Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
           }

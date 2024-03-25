@@ -2,7 +2,11 @@ import React from "react";
 export default function Spinner() {
   return (
     <div className="spinner-container">
-      <h2 className="spinner">Loading...</h2>
+      <div className="loader">
+        <li className="ball"></li>
+        <li className="ball"></li>
+        <li className="ball"></li>
+      </div>
     </div>
   );
 }

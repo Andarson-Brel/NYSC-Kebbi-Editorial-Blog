@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthorDate from "../components/authorDate";
 import BlogPostThmb from "../components/blogPostThmb";
 import Button from "../components/button";
@@ -6,20 +6,35 @@ import CategorySection from "../components/categorySectionComponent";
 import Excerpt from "../components/exerpt";
 import { isEmpty, orderBy } from "lodash";
 import { db } from "../firebase";
-
+import { useParams } from "react-router-dom";
 export default function Blog({ blogs, user, handleDelete, tags, getBlogs }) {
   const [search, setSearch] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
   const [filteredBlogs, setFilteredBlogs] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const { category } = useParams();
+
+  useEffect(() => {
+    if (category) {
+      setSelectedCategory(category); // Set selected category from URL params
+      filterBlogsByCategory(category);
+    }
+  }, [category]);
+
+  function filterBlogsByCategory(category) {
+    // Filter the blogs based on the selected category
+    const filteredResults = blogs.filter((blog) => blog.category === category);
+    setFilteredBlogs(filteredResults);
+  }
 
   function handleTagClick(tag) {
     setSelectedTag(tag);
-
     // Filter the blogs based on the selected tag
     const filteredResults = blogs.filter((blog) => blog.tags.includes(tag));
 
     setFilteredBlogs(filteredResults);
   }
+  // console.log("category:", category);
 
   function handleChange(e) {
     const { value } = e.target;
@@ -42,22 +57,17 @@ export default function Blog({ blogs, user, handleDelete, tags, getBlogs }) {
       setFilteredBlogs(filteredResults);
     }
   }
-
   const displayedBlogs =
     filteredBlogs.length > 0
       ? orderBy(filteredBlogs, ["timeStamp"], ["desc"])
       : orderBy(blogs, ["timeStamp"], ["desc"]);
 
-  // const displayedBlogs = filteredBlogs.length > 0 ? filteredBlogs : blogs;
-
   return (
     <>
-      <section className="featured-banner-cont">
-        {/* ... (your existing code) */}
-      </section>
+      <section className="featured-banner-cont"></section>
 
       <section className="blog-post-section">
-        <h1 className="blog-post-head">All Post</h1>
+        <h1 className="blog-post-head">{category ? category : "All Post"}</h1>
         <hr className="hr" />
         <div className="tag-category-section">
           <div className="tags-cont">
@@ -68,7 +78,7 @@ export default function Blog({ blogs, user, handleDelete, tags, getBlogs }) {
                   className={`tag ${tag === selectedTag ? "selectedTag" : ""}`}
                   key={i}
                   onClick={() => {
-                    console.log(tag);
+                    // console.log(tag);
                     handleTagClick(tag);
                   }}
                 >

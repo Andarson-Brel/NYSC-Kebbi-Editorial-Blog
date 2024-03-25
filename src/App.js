@@ -121,7 +121,7 @@ function App() {
         />
         <Route
           path="/update/:id"
-          element={<AddEditBlog setActive={setActive} />}
+          element={<AddEditBlog setActive={setActive} user={user} />}
         />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
@@ -142,7 +142,18 @@ function App() {
             />
           }
         />
-        {/* <Route path="/blog-post" element={<BlogPage />} /> */}
+        <Route
+          path="/blog/:category"
+          element={
+            <Blog
+              blogs={blogs}
+              user={user}
+              handleDelete={handleDelete}
+              tags={tags}
+            />
+          }
+        />
+        <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
     </div>

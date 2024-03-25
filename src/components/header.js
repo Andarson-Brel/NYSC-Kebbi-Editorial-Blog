@@ -54,12 +54,14 @@ export default function Header({ active, setActive, user, handleLogout }) {
                 Blog
               </li>
             </Link>
-            <li
-              className={`nav-item ${active === "" ? "active" : ""}`}
-              onClick={() => setActive("")}
-            >
-              About Us
-            </li>
+            <Link to={"about"}>
+              <li
+                className={`nav-item ${active === "" ? "active" : ""}`}
+                onClick={() => setActive("")}
+              >
+                About Us
+              </li>
+            </Link>
           </ul>
           <div className="btn-container">
             {userId ? (

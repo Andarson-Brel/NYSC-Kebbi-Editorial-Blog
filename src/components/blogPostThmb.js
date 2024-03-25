@@ -12,19 +12,16 @@ export default function BlogPostThmb({
   const body = description;
   return (
     <div className="blog-post-content">
-      <Link to={`blog-post/${id}`}>
+      <Link to={`/blog-page/blog-post/${id}`}>
         <div className="blog-post-img-cont">
           <img src={imgSrc} className="blog-post-img " alt={title} />
         </div>
       </Link>
       <div className="blog-post-desc-cont">
-        <Link to={`blog-post/${id}`}>
+        <Link to={`/blog-page/blog-post/${id}`}>
           <h4 className="blog-category-title">{category}</h4>
           <h2 className="blog-title">{title}</h2>
-          {/* <div
-            className="blog-desc"
-            dangerouslySetInnerHTML={{ __html: body }}
-          /> */}
+
           <p className="blog-desc">{description}</p>
         </Link>
         {user && (

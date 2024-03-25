@@ -34,6 +34,7 @@ const categoryOption = [
 ];
 
 export function AddEditBlog({ user, setActive }) {
+  console.log(user);
   const { id } = useParams();
   const [blogData, setBlog] = useState(initialState);
   const [file, setFile] = useState(null);
@@ -61,16 +62,18 @@ export function AddEditBlog({ user, setActive }) {
 
   async function getBlogDetail() {
     const docRef = doc(db, "blogpost", id);
-    const snapshot = await getDoc(docRef, orderBy("timestamp"));
+    const snapshot = await getDoc(docRef);
+
     console.log(snapshot);
 
     if (snapshot.exists()) {
-      const BlogPost = snapshot.docs.data();
+      const BlogPost = snapshot.data(); // Access data directly from snapshot
       console.log(BlogPost);
       setBlog({ ...BlogPost });
     }
     setActive(null);
   }
+
   useEffect(() => {
     function uploadFile() {
       const storageRef = ref(storage, file.name);
